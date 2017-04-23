@@ -12,7 +12,7 @@ import java.util.List;
  */
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/thread")
+@RequestMapping("thread")
 public class a_thread {
 
     @Autowired
@@ -22,10 +22,5 @@ public class a_thread {
     public List<e_thread> getAll(){
         return isThread.getAll();
     }
-    @GetMapping(value = "/index",produces = "application/json;charset=UTF-8")
-    public String  index(){
-        return "12345";
-    }
-
 
 }
