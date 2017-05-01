@@ -17,4 +17,8 @@ public interface id_thread extends JpaRepository<e_thread, Long> {
     @Query(value = "select * from thread ", nativeQuery = true)
     @Modifying
     public List<e_thread> getAll();
+
+    @Query(value = "select title from thread ", nativeQuery = true)
+    @Modifying
+    public List<String> getAlltitle();
 }

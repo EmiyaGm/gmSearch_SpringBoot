@@ -10,4 +10,10 @@ import java.util.List;
 public interface is_thread {
 
     public List<e_thread> getAll();
+
+    public Object getKeyword();
+
+    public Object getPreword();
+
+    public long topicNum(String topic);
 }
