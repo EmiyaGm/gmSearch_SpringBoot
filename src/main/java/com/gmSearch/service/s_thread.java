@@ -2,6 +2,7 @@ package com.gmSearch.service;
 
 import com.gmSearch.dao.id_thread;
 import com.gmSearch.entity.e_thread;
+import com.gmSearch.tools.HttpRequest;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -51,8 +52,10 @@ public class s_thread implements is_thread{
     }
 
     @Override
-    public Object getPreword() {
-        return null;
+    public Object getFreword() {
+        //发送 GET 请求
+        String s= HttpRequest.sendGet("http://localhost:8983/solr/gmSearch/admin/luke", "_=1494649051302&fl=title&numTerms=50&wt=json");
+        return s;
     }
 
     @Override

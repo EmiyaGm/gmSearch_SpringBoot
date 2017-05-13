@@ -30,7 +30,7 @@ public class a_thread {
 
     @RequestMapping(value = "/getFreword",produces = "application/json;charset=UTF-8")
     public JsonResult getFreword(){
-        return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.getPreword());
+        return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.getFreword());
     }
 
     @RequestMapping(value = "/topicNum",produces = "application/json;charset=UTF-8")

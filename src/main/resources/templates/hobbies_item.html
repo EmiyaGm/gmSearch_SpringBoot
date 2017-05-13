@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>demo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script th:src="@{/jquery-3.1.1.min.js}" type="text/javascript"></script>
+        <script th:src="@{/echarts.min.js}" type="text/javascript"></script>
+        <script th:src="@{/china.js}" type="text/javascript"></script>
+        <style>
+            body{
+                text-align: center;
+            }
+
+            #hobbies_item{
+                margin: 0 auto;
+            }
+
+            #phone{
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 th:text="${name}"></h1>
+        <div id="hobbies_item" style="width: 800px;height:400px;"></div>
+        <script>
+            var option;
+            switch ($("h1").text()){
+                case '数码':option = {
+                    title : {
+                        text: '数码产品兴趣度分布',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: ['手机','笔记本电脑','耳机','平板','其他']
+                    },
+                    series : [
+                        {
+                            name: '数量',
+                            type: 'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:[
+                                {value:74, name:'手机'},
+                                {value:68, name:'笔记本电脑'},
+                                {value:13, name:'耳机'},
+                                {value:4, name:'平板'},
+                                {value:43, name:'其他'}
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };var myChart = echarts.init(document.getElementById('hobbies_item'));
+                    myChart.setOption(option);break;
+                case '运动':option = {
+                    title : {
+                        text: '运动项目兴趣度分布',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: ['跑步','羽毛球','篮球','网球','足球','乒乓球','其他']
+                    },
+                    series : [
+                        {
+                            name: '数量',
+                            type: 'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:[
+                                {value:28, name:'跑步'},
+                                {value:26, name:'羽毛球'},
+                                {value:26, name:'篮球'},
+                                {value:26, name:'网球'},
+                                {value:11,name:'足球'},
+                                {value:10,name:'乒乓球'},
+                                {value:8, name:'其他'}
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };var myChart = echarts.init(document.getElementById('hobbies_item'));
+                    myChart.setOption(option);break;
+                default:break;
+            }
+
+
+        </script>
+        <div id = "phone" style="width: 800px;height:400px;"></div>
+        <script>
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ['其他','苹果','小米','华为','三星']
+                },
+                series: [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {value:33, name:'其他'},
+                            {value:21, name:'苹果'},
+                            {value:15, name:'小米'},
+                            {value:13, name:'华为'},
+                            {value:3, name:'三星'}
+                        ]
+                    }
+                ]
+            };
+            var myChart = echarts.init(document.getElementById('phone'));
+            myChart.setOption(option);
+        </script>
+    </body>
+</html>

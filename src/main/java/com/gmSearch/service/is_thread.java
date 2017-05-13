@@ -13,7 +13,7 @@ public interface is_thread {
 
     public Object getKeyword();
 
-    public Object getPreword();
+    public Object getFreword();
 
     public long topicNum(String topic);
 }
