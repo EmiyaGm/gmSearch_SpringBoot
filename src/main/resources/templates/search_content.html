@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script th:src="@{/jquery-3.1.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/echarts.min.js}" type="text/javascript"></script>
+    <script th:src="@{/china.js}" type="text/javascript"></script>
+    <style>
+        #table-1 thead, #table-1 tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgb(230, 189, 189);
+            width: 100%;
+        }
+        #table-1 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgb(230, 189, 189);
+
+        }
+
+        /* Padding and font style */
+        #table-1 td, #table-1 th {
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: Verdana;
+            color: rgb(177, 106, 104);
+            width: 33%;
+        }
+
+        /* Alternating background colors */
+        #table-1 tr:nth-child(even) {
+            background: rgb(238, 211, 210)
+        }
+        #table-1 tr:nth-child(odd) {
+            background: #FFF
+        }
+    </style>
+</head>
+    <body>
+        <h1 style="text-align: center">搜索结果</h1>
+        <a href="search.html">返回</a>
+        <table id="table-1">
+            <tr th:each="result:${results}">
+                <th><a th:href="${'http://tieba.baidu.com/p/'+result.id}" th:text="${result.title}"></a></th>
+                <td th:text="${'发帖人：'+result.author}"></td>
+                <td th:text="${'回复数：'+result.reply_num}"></td>
+            </tr>
+        </table>
+    </body>
+</html>

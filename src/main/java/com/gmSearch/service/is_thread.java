@@ -16,4 +16,6 @@ public interface is_thread {
     public Object getFreword();
 
     public long topicNum(String topic);
+
+    public List<e_thread> search(String title);
 }

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,7 +61,7 @@ public class s_thread implements is_thread{
 
     @Override
     public long topicNum(String topic){
-        String URL="http://127.0.0.1/solr/gmSearch";
+        String URL="http://127.0.0.1:8983/solr/gmSearch";
         HttpSolrClient server = new HttpSolrClient(URL);
         //定义查询内容 * 代表查询所有    这个是基于结果集
         SolrQuery query = new SolrQuery(topic); //定义查询内容
@@ -80,5 +81,37 @@ public class s_thread implements is_thread{
             System.out.println(doc);
         }
         return results.getNumFound();
+    }
+
+    @Override
+    public List<e_thread> search(String title) {
+        String URL="http://127.0.0.1:8983/solr/gmSearch";
+        HttpSolrClient server = new HttpSolrClient(URL);
+        //定义查询内容 * 代表查询所有    这个是基于结果集
+        SolrQuery query = new SolrQuery(); //定义查询内容
+        query.setQuery("title:"+title);
+        query.setStart(0);//起始页
+        query.setRows(20000);//每页显示数量
+        QueryResponse rsp = null;
+        try {
+            rsp = server.query(query);
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SolrDocumentList results = rsp.getResults();
+        System.out.println(results.getNumFound());//查询总条数
+        List<e_thread> titleList = new ArrayList<e_thread>();
+        for(SolrDocument solrDocument : results){
+            e_thread eThread = new e_thread();
+            eThread.setId(Long.parseLong(solrDocument.getFieldValue("id").toString()));
+            eThread.setAuthor(solrDocument.getFieldValue("author").toString());
+            eThread.setTitle(solrDocument.getFieldValue("title").toString());
+            eThread.setGood((Boolean) solrDocument.getFieldValue("good"));
+            eThread.setReply_num((Integer) solrDocument.getFieldValue("reply_num"));
+            titleList.add(eThread);
+        }
+        return titleList;
     }
 }

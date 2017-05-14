@@ -38,4 +38,9 @@ public class a_thread {
         return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.topicNum(topic));
     }
 
+    @RequestMapping(value = "/search",produces = "application/json;charset=UTF-8")
+    public JsonResult search(String title){
+        return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.search(title));
+    }
+
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script th:src="@{/jquery-3.1.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/echarts.min.js}" type="text/javascript"></script>
+    <script th:src="@{/china.js}" type="text/javascript"></script>
+    <style>
+        body{
+            text-align: center;
+        }
+        input{
+            height: 30px;
+        }
+    </style>
+</head>
+    <body>
+        <h1 style="margin-top: 16%">gmSearch</h1>
+        <form method="GET" action="/gmSearch/search_content">
+            <input type="text" name="title" style="margin-top: 30px;width: 30%;"/><input type="submit" value="点击搜索" style="width: 100px;border: 1px solid #ccc"/>
+        </form>
+        <a href="index.html" style="margin-top: 30px">返回主页</a>
+
+    </body>
+</html>
