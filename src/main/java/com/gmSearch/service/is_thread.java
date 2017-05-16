@@ -18,4 +18,6 @@ public interface is_thread {
     public long topicNum(String topic);
 
     public List<e_thread> search(String title);
+
+    public long topicNum(String topic,String college);
 }

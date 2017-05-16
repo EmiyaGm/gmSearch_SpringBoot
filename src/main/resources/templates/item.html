@@ -10,10 +10,107 @@
         body{
             text-align: center;
         }
+        #hobbies{
+            margin: 0 auto;
+        }
 
     </style>
 </head>
 <body>
-<p th:text="${name}"></p>
+<h1 th:text="${college+'详细分析'}"></h1>
+<div id = "hobbies" style="width: 800px;height:400px;"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var data = [];
+    var emotion = /*[[${emotion}]]*/;
+    data.push({value:emotion,name:"情感"});
+    var digit = /*[[${digit}]]*/;
+    data.push({value:digit,name:"数码"});
+    var read = /*[[${read}]]*/;
+    data.push({value:read,name:"阅读"});
+    var sports = /*[[${sports}]]*/;
+    data.push({value:sports,name:"运动"});
+    var game = /*[[${game}]]*/;
+    data.push({value:game,name:"游戏"});
+    var music = /*[[${music}]]*/;
+    data.push({value:music,name:"音乐"});
+    var build_body = /*[[${build_body}]]*/;
+    data.push({value:build_body,name:"健身"});
+    var film = /*[[${film}]]*/;
+    data.push({value:film,name:"电影"});
+    var create = /*[[${create}]]*/;
+    data.push({value:create,name:"创业"});
+    var fashion = /*[[${fashion}]]*/;
+    data.push({value:fashion,name:"时尚"});
+    /*]]>*/
+</script>
+<script>
+    var option = {
+        title : {
+            text: '大众兴趣话题统计玫瑰图',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            x : 'center',
+            y : 'bottom',
+            data:['情感','数码','阅读','运动','游戏','音乐','健身','电影','创业','时尚']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {
+                    show: true,
+                    type: ['pie', 'funnel']
+                },
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        series : [
+            {
+                name:'话题',
+                type:'pie',
+                radius : [20, 110],
+                center : ['25%', '50%'],
+                roseType : 'radius',
+                label: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                lableLine: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                data:data
+            },
+            {
+                name:'话题',
+                type:'pie',
+                radius : [30, 110],
+                center : ['75%', '50%'],
+                roseType : 'area',
+                data:data
+            }
+        ]
+    };
+    var myChart = echarts.init(document.getElementById('hobbies'));
+    myChart.setOption(option);
+</script>
+
 </body>
 </html>

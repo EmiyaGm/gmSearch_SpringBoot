@@ -111,52 +111,61 @@
         </script>
         <div id = "phone" style="width: 800px;height:400px;"></div>
         <script>
-            option = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)"
-                },
-                legend: {
-                    orient: 'vertical',
-                    x: 'left',
-                    data: ['其他','苹果','小米','华为','三星']
-                },
-                series: [
-                    {
-                        name:'访问来源',
-                        type:'pie',
-                        radius: ['50%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'center'
-                            },
-                            emphasis: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: '30',
-                                    fontWeight: 'bold'
+            if($("h1").text()=="数码"){
+                option = {
+                    title : {
+                        text: '手机品牌兴趣度分布',
+                        x:'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'left',
+                        data: ['其他','苹果','小米','华为','三星']
+                    },
+                    series: [
+                        {
+                            name:'数量',
+                            type:'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
                                 }
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                show: false
-                            }
-                        },
-                        data:[
-                            {value:33, name:'其他'},
-                            {value:21, name:'苹果'},
-                            {value:15, name:'小米'},
-                            {value:13, name:'华为'},
-                            {value:3, name:'三星'}
-                        ]
-                    }
-                ]
-            };
-            var myChart = echarts.init(document.getElementById('phone'));
-            myChart.setOption(option);
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:[
+                                {value:33, name:'其他'},
+                                {value:21, name:'苹果'},
+                                {value:15, name:'小米'},
+                                {value:13, name:'华为'},
+                                {value:3, name:'三星'}
+                            ]
+                        }
+                    ]
+                };
+                var myChart = echarts.init(document.getElementById('phone'));
+                myChart.setOption(option);
+            }else {
+                $("#phone").hide();
+            }
+
         </script>
         <a href="all.html"><p>后退</p></a>
     </body>
