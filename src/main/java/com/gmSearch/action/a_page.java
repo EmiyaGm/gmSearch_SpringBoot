@@ -2,6 +2,7 @@ package com.gmSearch.action;
 
 import com.gmSearch.entity.e_thread;
 import com.gmSearch.service.is_thread;
+import com.qcloud.Utilities.Json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -172,5 +173,15 @@ public class a_page {
         List<e_thread> results = isThread.search(title);
         model.addAttribute("results",results);
         return "search_content";
+    }
+
+    @RequestMapping(value = "/emotion")
+    public String emotion(String content,Model model){
+        String results = isThread.getEmotion(content);
+        JSONObject json_result = new JSONObject(results);
+        System.out.println(json_result);
+        model.addAttribute("positive",json_result.get("positive"));
+        model.addAttribute("negative",json_result.get("negative"));
+        return "emotion";
     }
 }

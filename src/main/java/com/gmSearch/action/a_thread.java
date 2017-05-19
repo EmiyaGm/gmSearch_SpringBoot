@@ -24,8 +24,8 @@ public class a_thread {
     }
 
     @RequestMapping(value = "/getKeyword",produces = "application/json;charset=UTF-8")
-    public JsonResult getKeyword(){
-        return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.getKeyword());
+    public JsonResult getKeyword(String title,String content){
+        return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.getKeyword(title,content));
     }
 
     @RequestMapping(value = "/getFreword",produces = "application/json;charset=UTF-8")
@@ -41,6 +41,11 @@ public class a_thread {
     @RequestMapping(value = "/search",produces = "application/json;charset=UTF-8")
     public JsonResult search(String title){
         return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.search(title));
+    }
+
+    @RequestMapping(value = "/getEmotion",produces = "application/json;charset=UTF-8")
+    public JsonResult getEmotion(String content){
+        return new JsonResult(ResultCode.SUCCESS,"请求成功",isThread.getEmotion(content));
     }
 
 }

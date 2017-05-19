@@ -11,7 +11,7 @@ public interface is_thread {
 
     public List<e_thread> getAll();
 
-    public Object getKeyword();
+    public Object getKeyword(String title,String content);
 
     public Object getFreword();
 
@@ -20,4 +20,6 @@ public interface is_thread {
     public List<e_thread> search(String title);
 
     public long topicNum(String topic,String college);
+
+    public String getEmotion(String content);
 }

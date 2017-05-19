@@ -7,6 +7,10 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.qcloud.Module.Cvm;
+import com.qcloud.Module.Wenzhi;
+import com.qcloud.QcloudApiModuleCenter;
+import com.qcloud.Utilities.Json.JSONObject;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -20,6 +24,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Created by gm on 2017/4/21.
@@ -36,20 +41,32 @@ public class s_thread implements is_thread{
     }
 
     @Override
-    public Object getKeyword() {
-        HttpResponse<JsonNode> clusterPushResponse = null;
+    public Object getKeyword(String title,String content) {
+        TreeMap<String, Object> config = new TreeMap<String, Object>();
+        config.put("SecretId", "AKIDeCoU7bM2ymQs9EFnWtIA2vojfcaTRHC8");
+        config.put("SecretKey", "8LZKFzP4ov0whR0MWUFn9LK7oMivzueC");
+        config.put("RequestMethod", "POST");
+        config.put("DefaultRegion", "sh");
+        QcloudApiModuleCenter module = new QcloudApiModuleCenter(new Wenzhi(),
+                config);
 
+        TreeMap<String, Object> params = new TreeMap<String, Object>();
+
+        params.put("title", title);
+        params.put("content", content);
+
+		/* generateUrl方法生成请求串,可用于调试使用 */
+        //System.out.println(module.generateUrl("DescribeInstances", params));
+        String result = null;
         try {
-            clusterPushResponse = Unirest
-                    .post("http://api.bosonnlp.com/keywords/analysis")
-                    .header("Accept", "application/json")
-                    .header("X-Token", "HCQrT8q0.14492.O4XXuOZ8HWQw")
-                    .body(new JSONArray(idThread.getAlltitle()).toString())
-                    .asJson();
-        } catch (UnirestException e) {
-            e.printStackTrace();
+			/* call 方法正式向指定的接口名发送请求，并把请求参数params传入，返回即是接口的请求结果。 */
+            result = module.call("TextKeywords", params);
+            JSONObject json_result = new JSONObject(result);
+            System.out.println(json_result);
+        } catch (Exception e) {
+            System.out.println("error..." + e.getMessage());
         }
-        return clusterPushResponse;
+        return result;
     }
 
     @Override
@@ -129,5 +146,33 @@ public class s_thread implements is_thread{
         }
         SolrDocumentList results = rsp.getResults();
         return results.getNumFound();
+    }
+
+    @Override
+    public String getEmotion(String content) {
+        TreeMap<String, Object> config = new TreeMap<String, Object>();
+        config.put("SecretId", "AKIDeCoU7bM2ymQs9EFnWtIA2vojfcaTRHC8");
+        config.put("SecretKey", "8LZKFzP4ov0whR0MWUFn9LK7oMivzueC");
+        config.put("RequestMethod", "POST");
+        config.put("DefaultRegion", "sh");
+        QcloudApiModuleCenter module = new QcloudApiModuleCenter(new Wenzhi(),
+                config);
+
+        TreeMap<String, Object> params = new TreeMap<String, Object>();
+
+        params.put("content", content);
+
+		/* generateUrl方法生成请求串,可用于调试使用 */
+        //System.out.println(module.generateUrl("DescribeInstances", params));
+        String result = null;
+        try {
+			/* call 方法正式向指定的接口名发送请求，并把请求参数params传入，返回即是接口的请求结果。 */
+            result = module.call("TextSentiment", params);
+            JSONObject json_result = new JSONObject(result);
+            System.out.println(json_result);
+        } catch (Exception e) {
+            System.out.println("error..." + e.getMessage());
+        }
+        return result;
     }
 }

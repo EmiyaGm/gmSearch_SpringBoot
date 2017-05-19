@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>demo</title>
+    <title>搜索结果</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script th:src="@{/jquery-3.1.1.min.js}" type="text/javascript"></script>
     <script th:src="@{/echarts.min.js}" type="text/javascript"></script>
@@ -43,9 +43,15 @@
         <a href="search.html">返回</a>
         <table id="table-1">
             <tr th:each="result:${results}">
-                <th><a th:href="${'http://tieba.baidu.com/p/'+result.id}" th:text="${result.title}"></a></th>
-                <td th:text="${'发帖人：'+result.author}"></td>
-                <td th:text="${'回复数：'+result.reply_num}"></td>
+                <form method="post" action="/gmSearch/emotion">
+                    <th>
+                        <a th:href="${'http://tieba.baidu.com/p/'+result.id}" th:text="${result.title}"></a>
+                        <input type="hidden" th:value="${result.title}" name="content" />
+                    </th>
+                    <td th:text="${'发帖人：'+result.author}"></td>
+                    <td th:text="${'回复数：'+result.reply_num}"></td>
+                    <td><input type="submit" value="情感分析" /></td>
+                </form>
             </tr>
         </table>
     </body>
