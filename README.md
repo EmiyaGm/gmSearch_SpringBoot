@@ -1,0 +1,4 @@
+# gmSearch_SpringBoot
+Solr服务建立的界面化站内搜索SpringBoot版
+## 简介
+此项目为Tieba_Spider项目的配套前端展示页面项目，采用SpringBoot微服务框架，用于图表的展现和搜索服务的实现。
