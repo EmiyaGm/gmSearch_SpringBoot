@@ -116,14 +116,28 @@ public class s_thread implements is_thread{
         SolrDocumentList results = rsp.getResults();
         System.out.println(results.getNumFound());//查询总条数
         List<e_thread> titleList = new ArrayList<e_thread>();
-        for(SolrDocument solrDocument : results){
+        if(results.getNumFound()==0){
             e_thread eThread = new e_thread();
-            eThread.setId(Long.parseLong(solrDocument.getFieldValue("id").toString()));
-            eThread.setAuthor(solrDocument.getFieldValue("author").toString());
-            eThread.setTitle(solrDocument.getFieldValue("title").toString());
-            eThread.setGood((Boolean) solrDocument.getFieldValue("good"));
-            eThread.setReply_num((Integer) solrDocument.getFieldValue("reply_num"));
+            eThread.setId(0);
+            eThread.setAuthor("无");
+            eThread.setTitle("无");
+            eThread.setReply_num(0);
+            eThread.setGood(false);
             titleList.add(eThread);
+        }else {
+            for(SolrDocument solrDocument : results){
+                e_thread eThread = new e_thread();
+                eThread.setId(Long.parseLong(solrDocument.getFieldValue("id").toString()));
+                if(solrDocument.getFieldValue("author")==null){
+                    eThread.setAuthor("IP用户");
+                }else {
+                    eThread.setAuthor(solrDocument.getFieldValue("author").toString());
+                }
+                eThread.setTitle(solrDocument.getFieldValue("title").toString());
+                eThread.setGood((Boolean) solrDocument.getFieldValue("good"));
+                eThread.setReply_num((Integer) solrDocument.getFieldValue("reply_num"));
+                titleList.add(eThread);
+            }
         }
         return titleList;
     }
